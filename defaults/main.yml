@@ -1,0 +1,14 @@
+---
+elasticsearch_heap_size: 1g
+elasticsearch_direct_mem_size: 2g
+elasticsearch_master: true
+elasticsearch_data: true
+elasticsearch_cluster_name: elasticsearch
+elasticsearch_node_name: "{{ inventory_hostname }}"
+elasticsearch_node_master: true
+elasticsearch_node_data: true
+elasticsearch_node_name: "{{ inventory_hostname }}"
+elasticsearch_network_host: 127.0.0.1
+elasticsearch_http_port: 9200
+elasticsearch_discovery_seed_hosts: "['127.0.0.1', '[::1]']"
+elasticsearch_exporter_version: 1.1.0

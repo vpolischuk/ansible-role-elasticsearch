@@ -1,0 +1,4 @@
+#Ansible managed
+ES_PATH_CONF=/etc/elasticsearch
+
+ES_JAVA_OPTS="-Xms{{ elasticsearch_heap_size }} -Xmx{{ elasticsearch_heap_size }} -XX:MaxDirectMemorySize={{ elasticsearch_direct_mem_size }}"

@@ -1,0 +1,44 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: lxd
+lint:
+  name: yamllint
+platforms:
+  - name: molecule-elastic-centos-7
+    source:
+      type: image
+      mode: pull
+      alias: centos/7/amd64
+      config:
+        security.nesting: 'true'
+  - name: molecule-elastic-debian-10
+    source:
+      type: image
+      mode: pull
+      alias: debian/buster/amd64
+      config:
+        security.nesting: 'true'
+  - name: molecule-elastic-debian-9
+    source:
+      type: image
+      mode: pull
+      alias: debian/stretch/amd64
+      config:
+        security.nesting: 'true'
+  - name: molecule-elastic-ubuntu-18-04
+    source:
+      type: image
+      mode: pull
+      alias: ubuntu/bionic/amd64
+      config:
+        security.nesting: 'true'
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

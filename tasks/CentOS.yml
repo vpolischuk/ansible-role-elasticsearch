@@ -1,0 +1,39 @@
+---
+- name: Add Elastic key
+  rpm_key:
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Elastic repo
+  yum_repository:
+    name: elasticsearch
+    description: Elasticsearch repository for 7.x packages
+    baseurl: https://artifacts.elastic.co/packages/7.x/yum
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+- name: Install Elastic
+  yum:
+    name: elasticsearch
+    state: present
+
+- name: Template elasticsearch defaults config
+  template:
+    src: elasticsearch.default.j2
+    dest: /etc/sysconfig/elasticsearch
+  notify:
+    - restart elasticsearch
+
+- name: Ensure Elastic started and enabled
+  service:
+    name: elasticsearch
+    state: started
+    enabled: true
+
+- name: Template elasticsearch_exporter config
+  template:
+    src: exporter.conf.j2
+    dest: /etc/sysconfig/elasticsearch_exporter
+  notify:
+    - restart elasticsearch_exporter
